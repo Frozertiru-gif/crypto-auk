@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TradeHub — Безопасная торговая площадка</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="TradeHub">
+          <span class="logo-mark">TH</span>
+          <span>TradeHub</span>
+        </a>
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="#catalog">Каталог</a>
+          <a href="#how-it-works">Как это работает</a>
+          <a href="#safety">Безопасность</a>
+          <a href="#support">Поддержка</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-ghost" href="dashboard.html">Войти</a>
+          <a class="btn btn-primary" href="dashboard.html">Создать аккаунт</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <div class="hero-content">
+          <p class="eyebrow">Единое пространство для покупок, продаж и заявок</p>
+          <h1>Совершайте сделки уверенно и общайтесь в безопасной среде</h1>
+          <p class="hero-subtitle">
+            TradeHub помогает быстро находить предложения, договариваться по условиям и
+            контролировать каждый этап сделки в одном интерфейсе.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="dashboard.html">Начать покупать</a>
+            <a class="btn btn-secondary" href="dashboard.html">Разместить предложение</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Превью сделки">
+          <h3>Карточка сделки</h3>
+          <p class="hero-card-title">Заявка на поставку оборудования</p>
+          <ul>
+            <li><span>Статус:</span> В процессе согласования</li>
+            <li><span>Бюджет:</span> По договорённости</li>
+            <li><span>Регион:</span> Москва и область</li>
+            <li><span>Коммуникация:</span> Встроенный чат</li>
+          </ul>
+          <button class="btn btn-secondary" type="button">Открыть диалог</button>
+        </aside>
+      </section>
+
+      <section class="search-section" id="catalog">
+        <div class="container search-panel">
+          <h2>Найдите нужное предложение</h2>
+          <div class="search-grid">
+            <label>
+              <span class="visually-hidden">Поиск</span>
+              <input type="search" placeholder="Поиск по объявлениям, услугам и заявкам" />
+            </label>
+            <select>
+              <option>Категория</option>
+              <option>Товары</option>
+              <option>Услуги</option>
+              <option>Для бизнеса</option>
+            </select>
+            <select>
+              <option>Регион</option>
+              <option>Москва</option>
+              <option>Санкт-Петербург</option>
+              <option>Другой регион</option>
+            </select>
+            <select>
+              <option>Цена</option>
+              <option>До 100 000 ₽</option>
+              <option>100 000–500 000 ₽</option>
+              <option>От 500 000 ₽</option>
+            </select>
+            <select>
+              <option>Сортировка</option>
+              <option>Сначала новые</option>
+              <option>По цене</option>
+              <option>По популярности</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section" id="categories">
+        <h2>Категории площадки</h2>
+        <div class="cards-grid categories-grid">
+          <article class="card category-card"><span>📦</span><h3>Товары</h3><p>Готовые предложения для частных и бизнес-задач.</p></article>
+          <article class="card category-card"><span>🛠️</span><h3>Услуги</h3><p>Исполнители и заказчики на одной площадке.</p></article>
+          <article class="card category-card"><span>🏢</span><h3>Недвижимость</h3><p>Размещение объектов и поиск актуальных вариантов.</p></article>
+          <article class="card category-card"><span>🚚</span><h3>Транспорт</h3><p>Покупка, продажа и подбор подходящих решений.</p></article>
+          <article class="card category-card"><span>💻</span><h3>Электроника</h3><p>Актуальные позиции и безопасные сделки по технике.</p></article>
+          <article class="card category-card"><span>🏬</span><h3>Для бизнеса</h3><p>Оборудование, услуги и B2B-предложения.</p></article>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="how-it-works">
+        <div class="container">
+          <h2>Как это работает</h2>
+          <div class="cards-grid">
+            <article class="card step-card"><p class="step-number">1</p><h3>Найдите предложение</h3><p>Используйте поиск и фильтры, чтобы быстро найти нужный вариант.</p></article>
+            <article class="card step-card"><p class="step-number">2</p><h3>Свяжитесь с продавцом</h3><p>Обсуждайте условия во встроенном чате и фиксируйте договорённости.</p></article>
+            <article class="card step-card"><p class="step-number">3</p><h3>Завершите сделку безопасно</h3><p>Отслеживайте статус сделки, документы и историю взаимодействий.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section" id="safety">
+        <h2>Почему пользователи доверяют TradeHub</h2>
+        <div class="cards-grid">
+          <article class="card"><h3>Безопасная коммуникация</h3><p>Встроенный чат хранит историю договорённостей и помогает избежать спорных ситуаций.</p></article>
+          <article class="card"><h3>Проверка продавцов</h3><p>Профили с подтверждёнными данными и прозрачной репутацией.</p></article>
+          <article class="card"><h3>История сделок</h3><p>Все этапы и статусы фиксируются в личном кабинете.</p></article>
+          <article class="card"><h3>Поддержка</h3><p>Команда поддержки помогает решать вопросы на каждом этапе взаимодействия.</p></article>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2>Популярные предложения</h2>
+          <div class="cards-grid offers-grid">
+            <article class="card offer-card"><h3>Пакет оборудования для офиса</h3><p>Готовое решение для запуска или расширения команды.</p><span class="status">Активно</span></article>
+            <article class="card offer-card"><h3>Комплексное сопровождение проекта</h3><p>Подходит для долгосрочного сотрудничества и масштабирования.</p><span class="status">Новый отклик</span></article>
+            <article class="card offer-card"><h3>Партия складской техники</h3><p>Оптимально для логистических задач и распределительных центров.</p><span class="status">Проверено</span></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="support">
+      <div class="container footer-grid">
+        <a class="logo" href="index.html"><span class="logo-mark">TH</span><span>TradeHub</span></a>
+        <a href="#">О платформе</a>
+        <a href="#">Правила</a>
+        <a href="#">Поддержка</a>
+        <a href="#">Безопасность</a>
+        <a href="#">Контакты</a>
+      </div>
+    </footer>
+  </body>
+</html>
