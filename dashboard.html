@@ -19,6 +19,7 @@
         </label>
         <div class="header-actions">
           <button class="btn btn-primary" type="button">Создать предложение</button>
+          <button class="btn btn-secondary" type="button" id="connectWalletBtn">Подключить кошелёк</button>
           <button class="icon-btn" type="button" aria-label="Уведомления">🔔</button>
           <button class="profile-btn" type="button" aria-label="Профиль">АК</button>
         </div>
@@ -29,6 +30,58 @@
       <section class="welcome panel">
         <h1>Здравствуйте, Алексей!</h1>
         <p>Управляйте предложениями, отслеживайте сделки и оставайтесь на связи с партнёрами.</p>
+      </section>
+
+      <section class="panel wallet-panel" id="wallet">
+        <div class="panel-header">
+          <h2>Кошелёк</h2>
+          <button class="btn btn-secondary" type="button" id="changeModeBtn">Изменить режим</button>
+        </div>
+        <div class="wallet-grid">
+          <article class="card wallet-card" id="walletConnectionCard">
+            <h3>Подключённый кошелёк</h3>
+            <dl>
+              <div><dt>Адрес</dt><dd id="walletAddress">—</dd></div>
+              <div><dt>Сеть</dt><dd id="walletNetwork">—</dd></div>
+              <div><dt>Native balance</dt><dd id="walletNativeBalance">—</dd></div>
+              <div><dt>Token balance</dt><dd id="walletTokenBalance">—</dd></div>
+            </dl>
+            <button class="btn btn-ghost" type="button" id="disconnectWalletBtn">Отключить</button>
+          </article>
+
+          <article class="card wallet-card" id="paymentModeCard">
+            <h3>Текущий режим оплаты</h3>
+            <p class="wallet-mode" id="paymentModeLabel">Безопасный</p>
+            <p id="paymentModeHint">Выберите режим, чтобы активировать крипто-оплаты на площадке.</p>
+          </article>
+
+          <article class="card wallet-card" id="convenientDetails">
+            <h3>Удобный режим</h3>
+            <dl>
+              <div><dt>Лимит</dt><dd id="permissionLimit">—</dd></div>
+              <div><dt>Использовано сегодня</dt><dd id="permissionUsedToday">—</dd></div>
+              <div><dt>Срок действия</dt><dd id="permissionExpiry">—</dd></div>
+              <div><dt>Разрешённые операции</dt><dd id="permissionOps">—</dd></div>
+            </dl>
+            <button class="btn btn-ghost" type="button" id="disableConvenientBtn">Отключить удобный режим</button>
+          </article>
+
+          <article class="card wallet-card" id="platformBalanceDetails">
+            <h3>Баланс площадки</h3>
+            <dl>
+              <div><dt>Внутренний баланс</dt><dd id="ledgerBalance">0 USDT</dd></div>
+            </dl>
+            <div class="wallet-actions-inline">
+              <button class="btn btn-primary" type="button" id="topUpBtn">Пополнить</button>
+              <button class="btn btn-secondary" type="button" id="withdrawBtn">Вывести</button>
+            </div>
+          </article>
+        </div>
+
+        <article class="card wallet-card">
+          <h3>История операций</h3>
+          <ul class="history-list" id="walletHistoryList"></ul>
+        </article>
       </section>
 
       <section class="quick-actions panel">
@@ -99,5 +152,67 @@
         </div>
       </section>
     </main>
+
+    <section class="web3-onboarding hidden" id="web3Onboarding" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
+      <div class="web3-onboarding-content">
+        <p class="eyebrow">Web3 onboarding</p>
+        <h2 id="onboardingTitle">Выберите способ оплаты криптой</h2>
+        <p>
+          Подключение кошелька само по себе не даёт платформе доступ к вашим средствам. Доступ к оплатам зависит от выбранного режима.
+        </p>
+        <p class="onboarding-hint">Подключение кошелька не списывает средства.</p>
+
+        <div class="mode-cards">
+          <label class="card mode-card">
+            <input type="radio" name="paymentMode" value="safe" />
+            <h3>Безопасный режим</h3>
+            <p>Подключение только для просмотра баланса и адреса. Автосписания и внутренний баланс не включаются.</p>
+            <small>Вы всегда сможете позже включить удобный режим или баланс площадки.</small>
+          </label>
+          <label class="card mode-card">
+            <input type="radio" name="paymentMode" value="convenient" />
+            <h3>Удобный режим</h3>
+            <p>Для автосписаний вы задаёте лимит и срок. Платформа не запрашивает безлимитный доступ.</p>
+            <small>Вы можете отключить удобный режим в любой момент.</small>
+          </label>
+          <label class="card mode-card">
+            <input type="radio" name="paymentMode" value="platform_balance" />
+            <h3>Баланс площадки</h3>
+            <p>Вы пополняете внутренний баланс одной транзакцией и оплачиваете сделки без повторных подтверждений.</p>
+            <small>Не отправляйте средства из неподдерживаемых сетей.</small>
+          </label>
+        </div>
+
+        <form class="mode-form hidden" id="convenientModeForm">
+          <h3>Параметры удобного режима</h3>
+          <p>Вы задаёте лимит и срок действия. Платформа сможет проводить только разрешённые операции в этих рамках.</p>
+          <div class="mode-form-grid">
+            <label><span>Максимальная сумма (USDT)</span><input type="number" min="1" step="1" id="limitInput" required /></label>
+            <label><span>Срок действия</span><input type="datetime-local" id="expiryInput" required /></label>
+            <label><span>Сеть</span><select id="networkInput"><option value="137">Polygon</option><option value="1">Ethereum</option></select></label>
+            <label><span>Токен</span><select id="tokenInput"><option value="USDT">USDT</option><option value="USDC">USDC</option></select></label>
+            <fieldset>
+              <legend>Тип операций</legend>
+              <label><input type="checkbox" value="fees" checked /> комиссии площадки</label>
+              <label><input type="checkbox" value="purchases" checked /> покупки</label>
+              <label><input type="checkbox" value="bids" checked /> ставки</label>
+            </fieldset>
+          </div>
+          <p class="security-copy">
+            Перед подписью вы увидите: токен, сеть, максимальную сумму и срок действия. Unlimited approve запрещён.
+          </p>
+        </form>
+
+        <div class="wallet-actions-inline onboarding-actions">
+          <button class="btn btn-secondary" type="button" id="cancelOnboardingBtn">Отмена</button>
+          <button class="btn btn-primary" type="button" id="continueOnboardingBtn">Продолжить</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast hidden" id="walletToast" role="status" aria-live="polite"></div>
+
+    <script src="wallet-api.js"></script>
+    <script src="dashboard.js"></script>
   </body>
 </html>
