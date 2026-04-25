@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TradeHub — Личный кабинет</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header logged-header">
+      <div class="container logged-header-inner">
+        <a class="logo" href="index.html" aria-label="TradeHub">
+          <span class="logo-mark">TH</span>
+          <span>TradeHub</span>
+        </a>
+        <label class="header-search">
+          <span class="visually-hidden">Поиск</span>
+          <input type="search" placeholder="Поиск по сделкам и предложениям" />
+        </label>
+        <div class="header-actions">
+          <button class="btn btn-primary" type="button">Создать предложение</button>
+          <button class="icon-btn" type="button" aria-label="Уведомления">🔔</button>
+          <button class="profile-btn" type="button" aria-label="Профиль">АК</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container dashboard-main">
+      <section class="welcome panel">
+        <h1>Здравствуйте, Алексей!</h1>
+        <p>Управляйте предложениями, отслеживайте сделки и оставайтесь на связи с партнёрами.</p>
+      </section>
+
+      <section class="quick-actions panel">
+        <h2>Быстрые действия</h2>
+        <div class="cards-grid quick-grid">
+          <a class="card quick-card" href="#">Создать предложение</a>
+          <a class="card quick-card" href="#">Найти товар/услугу</a>
+          <a class="card quick-card" href="#deals">Мои сделки</a>
+          <a class="card quick-card" href="#messages">Сообщения</a>
+        </div>
+      </section>
+
+      <section class="stats panel">
+        <h2>Статистика</h2>
+        <div class="cards-grid stats-grid">
+          <article class="card stat-card"><p>Активные объявления</p><strong>8</strong></article>
+          <article class="card stat-card"><p>Входящие заявки</p><strong>12</strong></article>
+          <article class="card stat-card"><p>Сделки в процессе</p><strong>3</strong></article>
+          <article class="card stat-card"><p>Уведомления</p><strong>5</strong></article>
+        </div>
+      </section>
+
+      <section class="panel" id="my-offers">
+        <div class="panel-header"><h2>Мои предложения</h2><a href="#">Все предложения</a></div>
+        <div class="cards-grid">
+          <article class="card offer-row"><h3>Комплексное снабжение офиса</h3><span class="badge active">Активно</span></article>
+          <article class="card offer-row"><h3>Аутсорс сопровождения проекта</h3><span class="badge review">На проверке</span></article>
+          <article class="card offer-row"><h3>Поставка техники для филиала</h3><span class="badge draft">Черновик</span></article>
+        </div>
+      </section>
+
+      <section class="panel" id="deals">
+        <div class="panel-header"><h2>Сделки</h2><a href="#">История сделок</a></div>
+        <div class="cards-grid">
+          <article class="card deal-row"><h3>Запрос на регулярные поставки</h3><span class="badge review">Ожидает ответа</span></article>
+          <article class="card deal-row"><h3>Сделка по оборудованию склада</h3><span class="badge active">В процессе</span></article>
+          <article class="card deal-row"><h3>Подбор исполнителя для поддержки</h3><span class="badge done">Завершена</span></article>
+        </div>
+      </section>
+
+      <section class="panel" id="recommendations">
+        <h2>Рекомендации</h2>
+        <div class="cards-grid offers-grid">
+          <article class="card"><h3>Пакет сервисного обслуживания</h3><p>Подходит для долгосрочных проектов с прогнозируемыми затратами.</p></article>
+          <article class="card"><h3>Готовая логистическая поддержка</h3><p>Решение для компаний, которым важна скорость и прозрачность процессов.</p></article>
+          <article class="card"><h3>Поставка профильного оборудования</h3><p>Актуально для расширения производства или открытия новых точек.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" id="messages">
+        <h2>Пустые состояния</h2>
+        <div class="cards-grid empty-grid">
+          <article class="card empty-state">
+            <h3>Пока нет объявлений</h3>
+            <p>Создайте первое предложение и начните получать отклики.</p>
+            <button class="btn btn-primary" type="button">Создать объявление</button>
+          </article>
+          <article class="card empty-state">
+            <h3>Пока нет сделок</h3>
+            <p>Найдите подходящие заявки и начните переговоры с контрагентами.</p>
+            <button class="btn btn-secondary" type="button">Найти заявки</button>
+          </article>
+          <article class="card empty-state">
+            <h3>Пока нет сообщений</h3>
+            <p>Как только появятся новые диалоги, вы увидите их здесь.</p>
+            <button class="btn btn-secondary" type="button">Открыть каталог</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
