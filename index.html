@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TradeHub — Безопасная торговая площадка</title>
+    <title>TradeHub — крипто-аукцион для крупных сделок</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -14,121 +14,98 @@
           <span>TradeHub</span>
         </a>
         <nav class="main-nav" aria-label="Основная навигация">
-          <a href="#catalog">Каталог</a>
-          <a href="#how-it-works">Как это работает</a>
+          <a href="#lots">Лоты</a>
+          <a href="#payments">Оплата</a>
           <a href="#safety">Безопасность</a>
-          <a href="#support">Поддержка</a>
+          <a href="#workflow">Процесс</a>
         </nav>
         <div class="header-actions">
           <a class="btn btn-ghost" href="dashboard.html">Войти</a>
-          <a class="btn btn-primary" href="dashboard.html">Создать аккаунт</a>
+          <a class="btn btn-primary" href="dashboard.html">Начать торги</a>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="hero container">
+      <section class="hero container landing-hero reveal">
         <div class="hero-content">
-          <p class="eyebrow">Единое пространство для покупок, продаж и заявок</p>
-          <h1>Совершайте сделки уверенно и общайтесь в безопасной среде</h1>
+          <p class="eyebrow">Web3 marketplace для ставок от $1000+</p>
+          <h1>Крипто-аукцион для оборудования, техники и B2B-поставок</h1>
           <p class="hero-subtitle">
-            TradeHub помогает быстро находить предложения, договариваться по условиям и
-            контролировать каждый этап сделки в одном интерфейсе.
+            TradeHub соединяет покупателей и продавцов, показывает доступный баланс перед ставкой и поддерживает оплату через кошелёк, удобный режим или внутренний баланс.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="dashboard.html">Начать покупать</a>
-            <a class="btn btn-secondary" href="dashboard.html">Разместить предложение</a>
+            <a class="btn btn-primary" href="dashboard.html">Открыть кабинет</a>
+            <a class="btn btn-secondary" href="#lots">Смотреть лоты</a>
           </div>
         </div>
-        <aside class="hero-card" aria-label="Превью сделки">
-          <h3>Карточка сделки</h3>
-          <p class="hero-card-title">Заявка на поставку оборудования</p>
+        <aside class="hero-card live-bid-card" aria-label="Пример live-аукциона">
+          <span class="badge active">LIVE</span>
+          <h3>ASIC Antminer S21 Pro, партия 10 шт.</h3>
+          <p class="hero-card-title">Текущая ставка: 9 400 USDT</p>
           <ul>
-            <li><span>Статус:</span> В процессе согласования</li>
-            <li><span>Бюджет:</span> По договорённости</li>
-            <li><span>Регион:</span> Москва и область</li>
-            <li><span>Коммуникация:</span> Встроенный чат</li>
+            <li><span>Следующая:</span> 9 500 USDT</li>
+            <li><span>До конца:</span> 9ч 20м</li>
+            <li><span>Оплата:</span> USDT / Polygon</li>
+            <li><span>Статус:</span> проверенный продавец</li>
           </ul>
-          <button class="btn btn-secondary" type="button">Открыть диалог</button>
+          <a class="btn btn-primary" href="dashboard.html">Сделать ставку</a>
         </aside>
       </section>
 
-      <section class="search-section" id="catalog">
-        <div class="container search-panel">
-          <h2>Найдите нужное предложение</h2>
-          <div class="search-grid">
-            <label>
-              <span class="visually-hidden">Поиск</span>
-              <input type="search" placeholder="Поиск по объявлениям, услугам и заявкам" />
-            </label>
-            <select>
-              <option>Категория</option>
-              <option>Товары</option>
-              <option>Услуги</option>
-              <option>Для бизнеса</option>
-            </select>
-            <select>
-              <option>Регион</option>
-              <option>Москва</option>
-              <option>Санкт-Петербург</option>
-              <option>Другой регион</option>
-            </select>
-            <select>
-              <option>Цена</option>
-              <option>До 100 000 ₽</option>
-              <option>100 000–500 000 ₽</option>
-              <option>От 500 000 ₽</option>
-            </select>
-            <select>
-              <option>Сортировка</option>
-              <option>Сначала новые</option>
-              <option>По цене</option>
-              <option>По популярности</option>
-            </select>
+      <section class="container section" id="lots">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Активные категории</p>
+            <h2>Лоты для крупных покупок</h2>
           </div>
         </div>
-      </section>
-
-      <section class="container section" id="categories">
-        <h2>Категории площадки</h2>
         <div class="cards-grid categories-grid">
-          <article class="card category-card"><span>📦</span><h3>Товары</h3><p>Готовые предложения для частных и бизнес-задач.</p></article>
-          <article class="card category-card"><span>🛠️</span><h3>Услуги</h3><p>Исполнители и заказчики на одной площадке.</p></article>
-          <article class="card category-card"><span>🏢</span><h3>Недвижимость</h3><p>Размещение объектов и поиск актуальных вариантов.</p></article>
-          <article class="card category-card"><span>🚚</span><h3>Транспорт</h3><p>Покупка, продажа и подбор подходящих решений.</p></article>
-          <article class="card category-card"><span>💻</span><h3>Электроника</h3><p>Актуальные позиции и безопасные сделки по технике.</p></article>
-          <article class="card category-card"><span>🏬</span><h3>Для бизнеса</h3><p>Оборудование, услуги и B2B-предложения.</p></article>
+          <article class="card category-card"><span>⚙</span><h3>Майнинг</h3><p>ASIC, блоки питания, стойки, готовые партии оборудования.</p></article>
+          <article class="card category-card"><span>▣</span><h3>GPU и серверы</h3><p>Видеокарты, серверные узлы, сетевое оборудование и комплектующие.</p></article>
+          <article class="card category-card"><span>◆</span><h3>B2B-поставки</h3><p>Оборудование для офисов, складов, дата-центров и производств.</p></article>
         </div>
       </section>
 
-      <section class="section section-alt" id="how-it-works">
+      <section class="section section-alt" id="payments">
         <div class="container">
-          <h2>Как это работает</h2>
+          <h2>Пользователь сразу видит, сколько может поставить</h2>
           <div class="cards-grid">
-            <article class="card step-card"><p class="step-number">1</p><h3>Найдите предложение</h3><p>Используйте поиск и фильтры, чтобы быстро найти нужный вариант.</p></article>
-            <article class="card step-card"><p class="step-number">2</p><h3>Свяжитесь с продавцом</h3><p>Обсуждайте условия во встроенном чате и фиксируйте договорённости.</p></article>
-            <article class="card step-card"><p class="step-number">3</p><h3>Завершите сделку безопасно</h3><p>Отслеживайте статус сделки, документы и историю взаимодействий.</p></article>
+            <article class="card step-card">
+              <p class="step-number">1</p>
+              <h3>Кошелёк</h3>
+              <p>Баланс кошелька виден в кабинете, ставки идут через быстрый доступ.</p>
+            </article>
+            <article class="card step-card">
+              <p class="step-number">2</p>
+              <h3>Convenient</h3>
+              <p>Разрешение официальному контракту без настройки суммы пользователем.</p>
+            </article>
+            <article class="card step-card">
+              <p class="step-number">3</p>
+              <h3>Баланс площадки</h3>
+              <p>Пользователь пополняет внутренний баланс и быстро участвует в нескольких торгах.</p>
+            </article>
           </div>
         </div>
       </section>
 
       <section class="container section" id="safety">
-        <h2>Почему пользователи доверяют TradeHub</h2>
+        <h2>Что заложено в MVP</h2>
         <div class="cards-grid">
-          <article class="card"><h3>Безопасная коммуникация</h3><p>Встроенный чат хранит историю договорённостей и помогает избежать спорных ситуаций.</p></article>
-          <article class="card"><h3>Проверка продавцов</h3><p>Профили с подтверждёнными данными и прозрачной репутацией.</p></article>
-          <article class="card"><h3>История сделок</h3><p>Все этапы и статусы фиксируются в личном кабинете.</p></article>
-          <article class="card"><h3>Поддержка</h3><p>Команда поддержки помогает решать вопросы на каждом этапе взаимодействия.</p></article>
+          <article class="card"><h3>Регистрация</h3><p>Аккаунт покупателя или продавца, сессия и история действий в локальной mock-базе.</p></article>
+          <article class="card"><h3>Ставки</h3><p>Минимальный шаг, проверка доступной суммы и live-обновление текущей цены.</p></article>
+          <article class="card"><h3>Кошелёк</h3><p>Mock-подключение, отображение баланса, режимы оплаты, пополнение внутреннего баланса.</p></article>
         </div>
       </section>
 
-      <section class="section section-alt">
+      <section class="section section-alt" id="workflow">
         <div class="container">
-          <h2>Популярные предложения</h2>
-          <div class="cards-grid offers-grid">
-            <article class="card offer-card"><h3>Пакет оборудования для офиса</h3><p>Готовое решение для запуска или расширения команды.</p><span class="status">Активно</span></article>
-            <article class="card offer-card"><h3>Комплексное сопровождение проекта</h3><p>Подходит для долгосрочного сотрудничества и масштабирования.</p><span class="status">Новый отклик</span></article>
-            <article class="card offer-card"><h3>Партия складской техники</h3><p>Оптимально для логистических задач и распределительных центров.</p><span class="status">Проверено</span></article>
+          <h2>Процесс сделки</h2>
+          <div class="cards-grid">
+            <article class="card offer-card"><h3>Покупатель регистрируется</h3><p>Подключает кошелёк и видит доступную сумму для ставок.</p><span class="status">1 шаг</span></article>
+            <article class="card offer-card"><h3>Участвует в торгах</h3><p>Система проверяет минимальную ставку и доступный баланс.</p><span class="status">2 шаг</span></article>
+            <article class="card offer-card"><h3>Фиксирует победу</h3><p>Финализация и escrow будут следующим backend-этапом.</p><span class="status">3 шаг</span></article>
           </div>
         </div>
       </section>
@@ -137,10 +114,10 @@
     <footer class="site-footer" id="support">
       <div class="container footer-grid">
         <a class="logo" href="index.html"><span class="logo-mark">TH</span><span>TradeHub</span></a>
-        <a href="#">О платформе</a>
-        <a href="#">Правила</a>
-        <a href="#">Поддержка</a>
-        <a href="#">Безопасность</a>
+        <a href="#lots">Лоты</a>
+        <a href="#payments">Оплата</a>
+        <a href="#safety">Безопасность</a>
+        <a href="dashboard.html">Кабинет</a>
         <a href="#">Контакты</a>
       </div>
     </footer>

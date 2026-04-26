@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TradeHub — Личный кабинет</title>
+    <title>TradeHub — крипто-аукцион</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -15,26 +15,82 @@
         </a>
         <label class="header-search">
           <span class="visually-hidden">Поиск</span>
-          <input type="search" placeholder="Поиск по сделкам и предложениям" />
+          <input type="search" id="auctionSearch" placeholder="Поиск по лотам, продавцам и категориям" />
         </label>
         <div class="header-actions">
-          <button class="btn btn-primary" type="button">Создать предложение</button>
-          <button class="btn btn-secondary" type="button" id="connectWalletBtn">Подключить кошелёк</button>
-          <button class="icon-btn" type="button" aria-label="Уведомления">🔔</button>
-          <button class="profile-btn" type="button" aria-label="Профиль">АК</button>
+          <button class="btn btn-secondary" type="button" id="connectWalletBtn">Кошелёк</button>
+          <button class="btn btn-primary" type="button" id="openCreateAuctionBtn">Создать лот</button>
+          <button class="icon-btn" type="button" aria-label="Уведомления">!</button>
+          <button class="profile-btn" type="button" id="profileBtn" aria-label="Профиль">?</button>
         </div>
       </div>
     </header>
 
     <main class="container dashboard-main">
-      <section class="welcome panel">
-        <h1>Здравствуйте, Алексей!</h1>
-        <p>Управляйте предложениями, отслеживайте сделки и оставайтесь на связи с партнёрами.</p>
+      <section class="app-hero panel reveal">
+        <div>
+          <p class="eyebrow">Крипто-аукцион с контролем средств</p>
+          <h1 id="welcomeTitle">Покупайте оборудование, технику и B2B-лоты через ставки в USDT</h1>
+          <p>
+            Регистрация, кошелёк, доступный баланс, live-ставки и история действий собраны в одном кабинете.
+          </p>
+        </div>
+        <div class="hero-metrics">
+          <article>
+            <span id="liveAuctionsCount">0</span>
+            <small>live-аукционов</small>
+          </article>
+          <article>
+            <span id="availableToBid">0 USDT</span>
+            <small>доступно для ставок</small>
+          </article>
+          <article>
+            <span id="myBidsCount">0</span>
+            <small>моих ставок</small>
+          </article>
+        </div>
       </section>
 
-      <section class="panel wallet-panel" id="wallet">
+      <section class="auth-panel panel reveal" id="authPanel">
         <div class="panel-header">
-          <h2>Кошелёк</h2>
+          <div>
+            <p class="eyebrow">Аккаунт</p>
+            <h2>Войдите или зарегистрируйтесь</h2>
+          </div>
+          <div class="segmented">
+            <button class="active" type="button" data-auth-tab="login">Вход</button>
+            <button type="button" data-auth-tab="register">Регистрация</button>
+          </div>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+          <label><span>Email</span><input type="email" id="loginEmail" autocomplete="email" required /></label>
+          <label><span>Пароль</span><input type="password" id="loginPassword" autocomplete="current-password" required /></label>
+          <button class="btn btn-primary" type="submit">Войти</button>
+        </form>
+
+        <form class="auth-form hidden" id="registerForm">
+          <label><span>Имя</span><input type="text" id="registerName" autocomplete="name" required /></label>
+          <label><span>Email</span><input type="email" id="registerEmail" autocomplete="email" required /></label>
+          <label><span>Пароль</span><input type="password" id="registerPassword" autocomplete="new-password" minlength="6" required /></label>
+          <label>
+            <span>Роль</span>
+            <select id="registerRole">
+              <option value="buyer">Покупатель</option>
+              <option value="seller">Продавец</option>
+              <option value="both">Покупатель и продавец</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" type="submit">Создать аккаунт</button>
+        </form>
+      </section>
+
+      <section class="panel wallet-panel reveal" id="wallet">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Финансы</p>
+            <h2>Кошелёк и оплата</h2>
+          </div>
           <button class="btn btn-secondary" type="button" id="changeModeBtn">Изменить режим</button>
         </div>
         <div class="wallet-grid">
@@ -49,21 +105,26 @@
             <button class="btn btn-ghost" type="button" id="disconnectWalletBtn">Отключить</button>
           </article>
 
+          <article class="card wallet-card highlight-card">
+            <h3>Можно потратить</h3>
+            <p class="wallet-mode" id="spendableBalance">0 USDT</p>
+            <p id="spendableHint">Подключите кошелёк или пополните баланс площадки.</p>
+          </article>
+
           <article class="card wallet-card" id="paymentModeCard">
-            <h3>Текущий режим оплаты</h3>
-            <p class="wallet-mode" id="paymentModeLabel">Безопасный</p>
+            <h3>Режим оплаты</h3>
+            <p class="wallet-mode" id="paymentModeLabel">Удобный</p>
             <p id="paymentModeHint">Выберите режим, чтобы активировать крипто-оплаты на площадке.</p>
           </article>
 
           <article class="card wallet-card" id="convenientDetails">
             <h3>Удобный режим</h3>
             <dl>
-              <div><dt>Лимит</dt><dd id="permissionLimit">—</dd></div>
-              <div><dt>Использовано сегодня</dt><dd id="permissionUsedToday">—</dd></div>
+              <div><dt>Доступ</dt><dd id="permissionAccess">—</dd></div>
               <div><dt>Срок действия</dt><dd id="permissionExpiry">—</dd></div>
-              <div><dt>Разрешённые операции</dt><dd id="permissionOps">—</dd></div>
+              <div><dt>Операции</dt><dd id="permissionOps">—</dd></div>
             </dl>
-            <button class="btn btn-ghost" type="button" id="disableConvenientBtn">Отключить удобный режим</button>
+            <button class="btn btn-ghost" type="button" id="disableConvenientBtn">Отключить</button>
           </article>
 
           <article class="card wallet-card" id="platformBalanceDetails">
@@ -77,77 +138,42 @@
             </div>
           </article>
         </div>
-
-        <article class="card wallet-card">
-          <h3>История операций</h3>
-          <ul class="history-list" id="walletHistoryList"></ul>
-        </article>
       </section>
 
-      <section class="quick-actions panel">
-        <h2>Быстрые действия</h2>
-        <div class="cards-grid quick-grid">
-          <a class="card quick-card" href="#">Создать предложение</a>
-          <a class="card quick-card" href="#">Найти товар/услугу</a>
-          <a class="card quick-card" href="#deals">Мои сделки</a>
-          <a class="card quick-card" href="#messages">Сообщения</a>
+      <section class="panel reveal">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Торги</p>
+            <h2>Live-аукционы</h2>
+          </div>
+          <div class="filter-row">
+            <select id="categoryFilter">
+              <option value="all">Все категории</option>
+              <option value="Оборудование">Оборудование</option>
+              <option value="Электроника">Электроника</option>
+              <option value="B2B">B2B</option>
+            </select>
+          </div>
         </div>
+        <div class="auction-grid" id="auctionGrid"></div>
       </section>
 
-      <section class="stats panel">
-        <h2>Статистика</h2>
-        <div class="cards-grid stats-grid">
-          <article class="card stat-card"><p>Активные объявления</p><strong>8</strong></article>
-          <article class="card stat-card"><p>Входящие заявки</p><strong>12</strong></article>
-          <article class="card stat-card"><p>Сделки в процессе</p><strong>3</strong></article>
-          <article class="card stat-card"><p>Уведомления</p><strong>5</strong></article>
+      <section class="panel reveal">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Мои действия</p>
+            <h2>Ставки и операции</h2>
+          </div>
+          <button class="btn btn-secondary" type="button" id="logoutBtn">Выйти</button>
         </div>
-      </section>
-
-      <section class="panel" id="my-offers">
-        <div class="panel-header"><h2>Мои предложения</h2><a href="#">Все предложения</a></div>
-        <div class="cards-grid">
-          <article class="card offer-row"><h3>Комплексное снабжение офиса</h3><span class="badge active">Активно</span></article>
-          <article class="card offer-row"><h3>Аутсорс сопровождения проекта</h3><span class="badge review">На проверке</span></article>
-          <article class="card offer-row"><h3>Поставка техники для филиала</h3><span class="badge draft">Черновик</span></article>
-        </div>
-      </section>
-
-      <section class="panel" id="deals">
-        <div class="panel-header"><h2>Сделки</h2><a href="#">История сделок</a></div>
-        <div class="cards-grid">
-          <article class="card deal-row"><h3>Запрос на регулярные поставки</h3><span class="badge review">Ожидает ответа</span></article>
-          <article class="card deal-row"><h3>Сделка по оборудованию склада</h3><span class="badge active">В процессе</span></article>
-          <article class="card deal-row"><h3>Подбор исполнителя для поддержки</h3><span class="badge done">Завершена</span></article>
-        </div>
-      </section>
-
-      <section class="panel" id="recommendations">
-        <h2>Рекомендации</h2>
-        <div class="cards-grid offers-grid">
-          <article class="card"><h3>Пакет сервисного обслуживания</h3><p>Подходит для долгосрочных проектов с прогнозируемыми затратами.</p></article>
-          <article class="card"><h3>Готовая логистическая поддержка</h3><p>Решение для компаний, которым важна скорость и прозрачность процессов.</p></article>
-          <article class="card"><h3>Поставка профильного оборудования</h3><p>Актуально для расширения производства или открытия новых точек.</p></article>
-        </div>
-      </section>
-
-      <section class="panel" id="messages">
-        <h2>Пустые состояния</h2>
-        <div class="cards-grid empty-grid">
-          <article class="card empty-state">
-            <h3>Пока нет объявлений</h3>
-            <p>Создайте первое предложение и начните получать отклики.</p>
-            <button class="btn btn-primary" type="button">Создать объявление</button>
+        <div class="activity-layout">
+          <article class="card wallet-card">
+            <h3>Мои ставки</h3>
+            <ul class="history-list" id="myBidsList"></ul>
           </article>
-          <article class="card empty-state">
-            <h3>Пока нет сделок</h3>
-            <p>Найдите подходящие заявки и начните переговоры с контрагентами.</p>
-            <button class="btn btn-secondary" type="button">Найти заявки</button>
-          </article>
-          <article class="card empty-state">
-            <h3>Пока нет сообщений</h3>
-            <p>Как только появятся новые диалоги, вы увидите их здесь.</p>
-            <button class="btn btn-secondary" type="button">Открыть каталог</button>
+          <article class="card wallet-card">
+            <h3>История кошелька</h3>
+            <ul class="history-list" id="walletHistoryList"></ul>
           </article>
         </div>
       </section>
@@ -157,50 +183,38 @@
       <div class="web3-onboarding-content">
         <p class="eyebrow">Web3 onboarding</p>
         <h2 id="onboardingTitle">Выберите способ оплаты криптой</h2>
-        <p>
-          Подключение кошелька само по себе не даёт платформе доступ к вашим средствам. Доступ к оплатам зависит от выбранного режима.
-        </p>
-        <p class="onboarding-hint">Подключение кошелька не списывает средства.</p>
+        <p>Для ставок можно использовать быстрый доступ через кошелёк или внутренний баланс площадки.</p>
 
         <div class="mode-cards">
           <label class="card mode-card">
-            <input type="radio" name="paymentMode" value="safe" />
-            <h3>Безопасный режим</h3>
-            <p>Подключение только для просмотра баланса и адреса. Автосписания и внутренний баланс не включаются.</p>
-            <small>Вы всегда сможете позже включить удобный режим или баланс площадки.</small>
-          </label>
-          <label class="card mode-card">
-            <input type="radio" name="paymentMode" value="convenient" />
+            <input type="radio" name="paymentMode" value="convenient" checked />
             <h3>Удобный режим</h3>
-            <p>Для автосписаний вы задаёте лимит и срок. Платформа не запрашивает безлимитный доступ.</p>
-            <small>Вы можете отключить удобный режим в любой момент.</small>
+            <p>Быстрые ставки через разрешение официальному контракту без настройки суммы.</p>
+            <small>Для быстрых ставок без повторного подтверждения каждой операции.</small>
           </label>
           <label class="card mode-card">
             <input type="radio" name="paymentMode" value="platform_balance" />
             <h3>Баланс площадки</h3>
-            <p>Вы пополняете внутренний баланс одной транзакцией и оплачиваете сделки без повторных подтверждений.</p>
-            <small>Не отправляйте средства из неподдерживаемых сетей.</small>
+            <p>Пополнение одной транзакцией, затем ставки проходят из внутреннего баланса.</p>
+            <small>Удобно для активных торгов.</small>
           </label>
         </div>
 
         <form class="mode-form hidden" id="convenientModeForm">
           <h3>Параметры удобного режима</h3>
-          <p>Вы задаёте лимит и срок действия. Платформа сможет проводить только разрешённые операции в этих рамках.</p>
+          <p>Сеть, токен и тип операций задаются сразу. Сумма не ограничивается.</p>
           <div class="mode-form-grid">
-            <label><span>Максимальная сумма (USDT)</span><input type="number" min="1" step="1" id="limitInput" required /></label>
             <label><span>Срок действия</span><input type="datetime-local" id="expiryInput" required /></label>
             <label><span>Сеть</span><select id="networkInput"><option value="137">Polygon</option><option value="1">Ethereum</option></select></label>
             <label><span>Токен</span><select id="tokenInput"><option value="USDT">USDT</option><option value="USDC">USDC</option></select></label>
             <fieldset>
               <legend>Тип операций</legend>
-              <label><input type="checkbox" value="fees" checked /> комиссии площадки</label>
+              <label><input type="checkbox" value="fees" checked /> комиссии</label>
               <label><input type="checkbox" value="purchases" checked /> покупки</label>
               <label><input type="checkbox" value="bids" checked /> ставки</label>
             </fieldset>
           </div>
-          <p class="security-copy">
-            Перед подписью вы увидите: токен, сеть, максимальную сумму и срок действия. Unlimited approve запрещён.
-          </p>
+          <p class="security-copy">Перед подписью пользователь видит токен, сеть, полный доступ по сумме, срок и разрешённые операции.</p>
         </form>
 
         <div class="wallet-actions-inline onboarding-actions">
@@ -210,8 +224,37 @@
       </div>
     </section>
 
+    <section class="web3-onboarding hidden" id="createAuctionModal" aria-modal="true" role="dialog" aria-labelledby="createAuctionTitle">
+      <div class="web3-onboarding-content compact-modal">
+        <p class="eyebrow">Новый лот</p>
+        <h2 id="createAuctionTitle">Создать аукцион</h2>
+        <form class="mode-form visible-form" id="createAuctionForm">
+          <div class="mode-form-grid">
+            <label><span>Название</span><input type="text" id="auctionTitleInput" required /></label>
+            <label>
+              <span>Категория</span>
+              <select id="auctionCategoryInput">
+                <option>Оборудование</option>
+                <option>Электроника</option>
+                <option>B2B</option>
+              </select>
+            </label>
+            <label><span>Стартовая цена, USDT</span><input type="number" min="1" step="1" id="auctionStartInput" required /></label>
+            <label><span>Шаг ставки, USDT</span><input type="number" min="1" step="1" id="auctionStepInput" value="100" /></label>
+            <label><span>Длительность, часов</span><input type="number" min="1" step="1" id="auctionDurationInput" value="24" /></label>
+            <label class="wide-field"><span>Описание</span><textarea id="auctionDescriptionInput" required></textarea></label>
+          </div>
+          <div class="wallet-actions-inline onboarding-actions">
+            <button class="btn btn-secondary" type="button" id="cancelCreateAuctionBtn">Отмена</button>
+            <button class="btn btn-primary" type="submit">Опубликовать</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <div class="toast hidden" id="walletToast" role="status" aria-live="polite"></div>
 
+    <script src="app-db.js"></script>
     <script src="wallet-api.js"></script>
     <script src="dashboard.js"></script>
   </body>
